@@ -1,0 +1,575 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>노동법 모니터</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+<style>
+  :root{
+    --paper:#E9ECEA;
+    --card:#FBFCFB;
+    --ink:#131E1D;
+    --muted:#5C6B69;
+    --rule:#CBD4D1;
+    --rule-2:#DDE3E1;
+    --seal:#A81E17;
+    --live:#17614F;
+    --soon:#8A5A12;
+    --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --serif:'Nanum Myeongjo',serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:15px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+
+  /* ── masthead ─────────────────────────── */
+  .mast{padding:34px 0 18px;border-bottom:2px solid var(--ink)}
+  .mast-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .mast h1{
+    font-family:var(--serif);font-weight:800;font-size:34px;letter-spacing:-.01em;
+    margin:0;line-height:1;
+  }
+  .mast-meta{
+    font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    letter-spacing:.06em;text-transform:uppercase;margin-top:9px;
+  }
+  .mast-meta b{color:var(--ink);font-weight:600}
+  .mast-actions{display:flex;gap:8px}
+
+  .btn{
+    font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);
+    background:transparent;border:1px solid var(--ink);border-radius:2px;
+    padding:7px 14px;cursor:pointer;transition:background .15s,color .15s;
+  }
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+  .notice{
+    font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--seal);
+    border:1px solid var(--seal);border-radius:2px;padding:4px 9px;display:inline-block;margin-top:14px;
+  }
+
+  /* ── 시행일 축 (signature) ─────────────── */
+  .axis{padding:30px 0 8px;border-bottom:1px solid var(--rule)}
+  .axis-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:24px;
+  }
+  .axis-track{position:relative;height:96px;margin:0 6px}
+  .axis-line{position:absolute;left:0;right:0;top:34px;height:1px;background:var(--rule)}
+  .axis-line::before{content:"";position:absolute;left:0;top:-3px;width:1px;height:7px;background:var(--ink)}
+  .axis-now{
+    position:absolute;top:20px;left:0;width:2px;height:29px;background:var(--seal);
+  }
+  .axis-now span{
+    position:absolute;top:-17px;left:-4px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.08em;color:var(--seal);white-space:nowrap;
+  }
+  .pin{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:104px}
+  .pin-dot{
+    width:9px;height:9px;border-radius:50%;background:var(--card);
+    border:2px solid var(--live);margin:30px auto 0;position:relative;z-index:2;
+    transition:transform .15s;
+  }
+  .pin.soon .pin-dot{border-color:var(--soon)}
+  .pin.act .pin-dot{border-color:var(--seal);background:var(--seal)}
+  .pin-d{
+    font-family:var(--mono);font-size:13px;font-weight:600;margin-top:9px;line-height:1.2;
+  }
+  .pin.act .pin-d{color:var(--seal)}
+  .pin.soon .pin-d{color:var(--soon)}
+  .pin.later .pin-d{color:var(--live)}
+  .pin-t{font-size:10.5px;color:var(--muted);line-height:1.35;margin-top:3px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pin button{all:unset;cursor:pointer;display:block;width:100%}
+  .pin button:hover .pin-dot{transform:scale(1.5)}
+  .pin button:focus-visible .pin-dot{outline:2px solid var(--seal);outline-offset:3px}
+
+  /* ── layout ───────────────────────────── */
+  .cols{display:grid;grid-template-columns:1fr 340px;gap:44px;padding-top:34px;align-items:start}
+
+  /* ── filters ──────────────────────────── */
+  .bar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{
+    font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+    border:1px solid var(--rule);background:transparent;color:var(--muted);
+    padding:5px 11px;border-radius:2px;cursor:pointer;transition:.15s;
+  }
+  .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .chip:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+  .search{
+    flex:1;min-width:180px;font-family:var(--sans);font-size:13.5px;
+    background:transparent;border:0;border-bottom:1px solid var(--rule);
+    padding:6px 2px;color:var(--ink);
+  }
+  .search::placeholder{color:var(--muted)}
+  .search:focus{outline:0;border-bottom-color:var(--ink)}
+
+  /* ── group heads ──────────────────────── */
+  .ghead{
+    display:flex;align-items:baseline;gap:10px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:34px 0 14px;
+  }
+  .ghead:first-of-type{margin-top:0}
+  .ghead.urgent{color:var(--seal)}
+  .ghead i{flex:1;height:1px;background:var(--rule);font-style:normal}
+
+  /* ── item ─────────────────────────────── */
+  .item{
+    background:var(--card);border:1px solid var(--rule-2);border-radius:2px;
+    padding:18px 20px;margin-bottom:10px;position:relative;
+  }
+  .item.act{border-left:3px solid var(--seal)}
+  .item-top{display:flex;gap:10px;align-items:center;margin-bottom:9px;flex-wrap:wrap}
+  .kind{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    border:1px solid var(--rule);color:var(--muted);padding:2px 7px;border-radius:2px;
+  }
+  .kind.k1{border-color:var(--ink);color:var(--ink)}
+  .eff{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em}
+  .eff b{color:var(--ink);font-weight:600}
+  .item h3{
+    font-family:var(--serif);font-weight:700;font-size:18.5px;line-height:1.45;
+    margin:0 0 8px;letter-spacing:-.005em;
+  }
+  .item p{margin:0 0 12px;font-size:14px;color:#2C3A38}
+  .scope{
+    font-size:12.5px;color:var(--muted);border-top:1px dotted var(--rule);
+    padding-top:10px;margin-bottom:12px;
+  }
+  .scope b{color:var(--ink);font-weight:600}
+  .item-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .ghost{
+    all:unset;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted);
+    border:1px solid var(--rule);padding:4px 10px;border-radius:2px;cursor:pointer;transition:.15s;
+  }
+  .ghost:hover{border-color:var(--ink);color:var(--ink)}
+  .ghost:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+  .src{
+    font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--seal);
+    text-decoration:none;border-bottom:1px solid transparent;padding:4px 0;margin-left:auto;
+  }
+  .src:hover{border-bottom-color:var(--seal)}
+
+  .status{
+    font-family:var(--mono);font-size:11px;color:var(--ink);background:transparent;
+    border:1px solid var(--rule);border-radius:2px;padding:4px 8px;cursor:pointer;
+  }
+  .status:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+  /* 신구대비 */
+  .diff{display:none;margin-top:14px;border-top:1px solid var(--rule);padding-top:14px}
+  .diff.open{display:block}
+  .diff-h{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px;
+  }
+  .diff-art{font-family:var(--mono);font-size:11px;color:var(--ink);margin:12px 0 6px;font-weight:600}
+  .diff-art:first-of-type{margin-top:0}
+  .diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+  .diff-cell{background:var(--card);padding:12px 13px}
+  .diff-cell h4{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);
+    margin:0 0 7px;font-weight:500;
+  }
+  .diff-cell.new h4{color:var(--seal)}
+  .diff-cell p{font-size:13px;line-height:1.65;margin:0;color:#2C3A38}
+  .diff-cell.new p{color:var(--ink)}
+  mark{background:#F3DEDC;color:var(--seal);padding:0 2px;font-weight:600}
+
+  /* ── ask panel ────────────────────────── */
+  .ask{position:sticky;top:22px;border:1px solid var(--ink);border-radius:2px;background:var(--card);
+    display:flex;flex-direction:column;max-height:calc(100vh - 44px)}
+  .ask-h{padding:15px 17px;border-bottom:1px solid var(--rule)}
+  .ask-h strong{font-family:var(--serif);font-size:17px;font-weight:700;display:block}
+  .ask-h span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);display:block;margin-top:4px}
+  .log{flex:1;overflow-y:auto;padding:16px 17px;min-height:190px;font-size:13.5px}
+  .msg{margin-bottom:15px}
+  .msg .who{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);margin-bottom:5px}
+  .msg.a .who{color:var(--seal)}
+  .msg p{margin:0 0 7px;line-height:1.65}
+  .msg .ref{font-family:var(--mono);font-size:10.5px;color:var(--muted);border-left:2px solid var(--rule);padding-left:8px;margin-top:8px;display:block}
+  .seed{padding:0 17px 12px;display:flex;flex-direction:column;gap:5px}
+  .seed button{
+    all:unset;font-size:12px;color:var(--muted);border:1px solid var(--rule-2);border-radius:2px;
+    padding:6px 9px;cursor:pointer;line-height:1.4;
+  }
+  .seed button:hover{border-color:var(--ink);color:var(--ink)}
+  .seed button:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+  .ask-f{display:flex;border-top:1px solid var(--rule)}
+  .ask-f input{flex:1;border:0;background:transparent;padding:13px 15px;font-family:var(--sans);font-size:13.5px;color:var(--ink)}
+  .ask-f input:focus{outline:0}
+  .ask-f button{
+    all:unset;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--seal);
+    padding:0 16px;cursor:pointer;
+  }
+  .ask-f button:focus-visible{outline:2px solid var(--seal);outline-offset:-2px}
+
+  /* ── modal ────────────────────────────── */
+  .veil{position:fixed;inset:0;background:rgba(19,30,29,.55);display:none;z-index:50;
+    padding:28px 20px;overflow-y:auto}
+  .veil.open{display:block}
+  .sheet{max-width:660px;margin:0 auto;background:#fff;border-radius:2px}
+  .sheet-h{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;
+    border-bottom:1px solid var(--rule);position:sticky;top:0;background:#fff}
+  .sheet-h strong{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .sheet-h button{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--seal);padding:4px}
+  .sheet-h button:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+  .mail{padding:32px 34px;font-size:14px}
+  .mail-top{border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:22px}
+  .mail-top h2{font-family:var(--serif);font-size:23px;margin:0;font-weight:800}
+  .mail-top div{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin-top:6px}
+  .mail-sec{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--seal);margin:24px 0 10px}
+  .mail-sec.q{color:var(--muted)}
+  .mail-item{border-left:2px solid var(--rule);padding-left:14px;margin-bottom:16px}
+  .mail-item.act{border-left-color:var(--seal)}
+  .mail-item h3{font-family:var(--serif);font-size:16px;margin:0 0 5px;font-weight:700}
+  .mail-item .m{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:5px}
+  .mail-item p{margin:0;font-size:13.5px;color:#2C3A38;line-height:1.6}
+  .mail-item a{font-family:var(--mono);font-size:11px;color:var(--seal);text-decoration:none;display:inline-block;margin-top:6px}
+  .mail-foot{border-top:1px solid var(--rule);margin-top:26px;padding-top:14px;
+    font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.7}
+
+  @media(max-width:900px){
+    .cols{grid-template-columns:1fr;gap:34px}
+    .ask{position:static;max-height:none}
+    .axis-track{height:110px}
+    .pin{width:76px}
+    .diff-grid{grid-template-columns:1fr}
+    .mast h1{font-size:27px}
+    .mail{padding:22px 20px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-row">
+      <div>
+        <h1>노동법 모니터</h1>
+        <div class="mast-meta">제 <b>12</b> 호 · 2026년 8월 28일 금요일 · 인사팀</div>
+      </div>
+      <div class="mast-actions">
+        <button class="btn" id="mailBtn">메일 미리보기</button>
+      </div>
+    </div>
+    <div class="notice">예시 데이터 — 실제 법령 정보가 아닙니다</div>
+  </header>
+
+  <section class="axis">
+    <div class="axis-label">시행일 축</div>
+    <div class="axis-track" id="axis">
+      <div class="axis-line"></div>
+      <div class="axis-now"><span>오늘</span></div>
+    </div>
+  </section>
+
+  <div class="cols">
+    <main>
+      <div class="bar">
+        <div class="chips" id="chips">
+          <button class="chip" data-f="all" aria-pressed="true">전체</button>
+          <button class="chip" data-f="act" aria-pressed="false">조치 필요</button>
+          <button class="chip" data-f="고시" aria-pressed="false">고시·훈령</button>
+          <button class="chip" data-f="법령" aria-pressed="false">법령</button>
+          <button class="chip" data-f="예고" aria-pressed="false">입법예고</button>
+          <button class="chip" data-f="뉴스" aria-pressed="false">뉴스</button>
+        </div>
+        <input class="search" id="q" placeholder="아카이브 검색 — 육아휴직, 최저임금 …" aria-label="아카이브 검색">
+      </div>
+      <div id="list"></div>
+    </main>
+
+    <aside class="ask">
+      <div class="ask-h">
+        <strong>물어보기</strong>
+        <span>수집된 항목만 근거로 답합니다</span>
+      </div>
+      <div class="log" id="log">
+        <div class="msg a">
+          <div class="who">모니터</div>
+          <p>지금까지 수집된 <b>412건</b> 중에서 찾아드립니다. 답변에는 항상 원문 출처가 붙습니다.</p>
+        </div>
+      </div>
+      <div class="seed" id="seed">
+        <button>육아휴직 관련해서 올해 바뀐 게 뭐야?</button>
+        <button>10월 1일 시행분 중 우리가 준비할 건?</button>
+        <button>취업규칙 개정이 필요한 항목만 추려줘</button>
+      </div>
+      <div class="ask-f">
+        <input id="qi" placeholder="질문을 입력하세요" aria-label="질문 입력">
+        <button id="send">보내기</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="이메일 미리보기">
+  <div class="sheet">
+    <div class="sheet-h">
+      <strong>매일 08:30 발송 · hr-team@company.co.kr</strong>
+      <button id="close">닫기 ✕</button>
+    </div>
+    <div class="mail" id="mail"></div>
+  </div>
+</div>
+
+<script>
+const TODAY = new Date('2026-08-28');
+const SAMPLE = [
+  { id:1, kind:'고시', act:true, title:'2027년 적용 최저임금 고시',
+    eff:'2027-01-01',
+    sum:'2027년 적용 최저임금액이 고시되었습니다. 시간급 기준이며 업종별 구분 적용 없이 전 사업장에 동일하게 적용됩니다.',
+    scope:'전 직원 · 특히 수습·단시간 근로자 임금 재산정 필요',
+    src:'고용노동부 고시', link:'#',
+    diff:[{article:'제1조(최저임금액)', old:'시간급 최저임금액은 종전 고시액에 따른다.', new:'시간급 최저임금액을 인상된 금액으로 하며, 수습 사용 중인 자에 대한 감액 규정은 종전과 동일하게 유지한다.'}] },
+
+  { id:2, kind:'법령', act:true, title:'근로기준법 시행령 일부개정령',
+    eff:'2026-10-01',
+    sum:'연차유급휴가 사용촉진 절차의 서면 통보 요건이 구체화되었습니다. 통보 시기와 기재사항이 명문화되어 기존 사내 양식 수정이 필요합니다.',
+    scope:'전 사업장 · 연차 촉진 통보 양식 및 HR 시스템 템플릿 수정',
+    src:'국가법령정보센터', link:'#',
+    diff:[
+      {article:'제7조(연차 유급휴가의 사용 촉진)', old:'사용자는 근로자별로 사용하지 아니한 휴가 일수를 알려주어야 한다.', new:'사용자는 근로자별로 사용하지 아니한 휴가 일수를 서면으로 알리고, 근로자가 그 사용 시기를 정하여 사용자에게 통보하도록 서면으로 촉구하여야 한다.'},
+      {article:'제7조제2항', old:'', new:'제1항에 따른 촉구는 휴가 사용 기간이 끝나기 6개월 전을 기준으로 10일 이내에 하여야 한다.'}] },
+
+  { id:3, kind:'예고', act:false, title:'직장 내 괴롭힘 예방·대응 관련 고시 개정 행정예고',
+    eff:'2026-11-15',
+    sum:'조사 절차와 피해자 보호조치 기준을 정비하는 개정안이 행정예고되었습니다. 아직 확정 전 단계이며 의견 제출 기간이 열려 있습니다.',
+    scope:'검토 단계 · 확정 시 사내 규정 및 조사 매뉴얼 개정 예상',
+    src:'고용노동부 입법·행정예고', link:'#' },
+
+  { id:4, kind:'법령', act:false, title:'남녀고용평등법 시행규칙 일부개정',
+    eff:'2026-11-01',
+    sum:'육아기 근로시간 단축 신청 서식과 첨부서류 요건이 조정되었습니다. 신청 처리 흐름 자체는 유지됩니다.',
+    scope:'해당 신청자 · HR 포털 신청 서식 교체',
+    src:'국가법령정보센터', link:'#' },
+
+  { id:5, kind:'고시', act:false, title:'산업안전보건 관련 고시 개정',
+    eff:'2026-12-01',
+    sum:'위험성평가 실시 주기와 기록 보존 기준이 일부 조정되었습니다. 사무직 중심 사업장은 영향이 제한적입니다.',
+    scope:'제조·현장 사업장 중심 · 본사 영향 낮음',
+    src:'고용노동부 고시', link:'#' },
+
+  { id:6, kind:'뉴스', act:false, title:'통상임금 범위 관련 후속 실무 대응 논의',
+    eff:'',
+    sum:'판결 이후 기업들의 임금체계 개편 사례가 보도되고 있습니다. 법령 변경은 아니며 참고용입니다.',
+    scope:'참고 · 임금체계 개편 검토 시 자료',
+    src:'언론 보도', link:'#' },
+
+  { id:7, kind:'뉴스', act:false, title:'정년 연장 관련 노사정 논의 경과',
+    eff:'',
+    sum:'제도 변경 여부는 확정되지 않았습니다. 논의 단계의 보도입니다.',
+    scope:'참고 · 확정 사항 없음',
+    src:'언론 보도', link:'#' }
+];
+
+/* data.json 이 있으면 실제 데이터로, 없으면 위 샘플로 동작합니다. */
+let DATA = SAMPLE, LIVE = false;
+async function boot(){
+  try{
+    const r = await fetch('data.json', {cache:'no-store'});
+    if(!r.ok) throw 0;
+    const j = await r.json();
+    if(!j.items || !j.items.length) throw 0;
+    DATA = j.items.map((it, n) => ({
+      id:n+1, kind:it.kind || '기타', act:it.action_level==='urgent',
+      title:it.title, eff:it.effective_date || '', sum:it.summary || '',
+      scope:it.scope || '', src:it.source || '원문', link:it.link || '#',
+      status:it.status || '신규', uid:it.uid,
+      diff:(it.diff && it.diff.length) ? it.diff : null, diffSrc:it.diff_source || ''
+    }));
+    LIVE = true;
+    document.querySelector('.notice').remove();
+    document.querySelector('.mast-meta').innerHTML =
+      `제 <b>${j.issue}</b> 호 · ${j.generated_at} 기준 · 누적 ${j.stats.relevant}건 · 미완료 조치 <b>${j.stats.open_actions}</b>건`;
+  }catch(e){ /* 샘플 유지 */ }
+  DATA.forEach(d => stat[d.id] = d.status || '신규');
+  buildAxis(); render(); buildMail();
+}
+
+const esc = t => String(t==null?'':t).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dday = e => e ? Math.round((new Date(e)-TODAY)/864e5) : null;
+const ddText = d => d===null?'상시':(d<0?`시행 ${-d}일 경과`:(d===0?'오늘 시행':`D-${d}`));
+const stat = {};
+
+/* ── 시행일 축 ── */
+function buildAxis(){
+  const track = document.getElementById('axis');
+  track.querySelectorAll('.pin').forEach(el=>el.remove());
+  const pins = DATA.filter(d=>d.eff).sort((a,b)=>new Date(a.eff)-new Date(b.eff));
+  const max = Math.max(...pins.map(p=>dday(p.eff)));
+  pins.forEach(p=>{
+    const d = dday(p.eff);
+    const pct = 6 + (d/max)*88;
+    const cls = p.act ? 'act' : (d<=60 ? 'soon' : 'later');
+    const el = document.createElement('div');
+    el.className = 'pin '+cls;
+    el.style.left = pct+'%';
+    el.innerHTML = `<button aria-label="${p.title}">
+      <div class="pin-dot"></div>
+      <div class="pin-d">${ddText(d)}</div>
+      <div class="pin-t">${p.title}</div></button>`;
+    el.querySelector('button').onclick = ()=>{
+      const card = document.getElementById('i'+p.id);
+      if(card){ card.scrollIntoView({behavior:'smooth',block:'center'});
+        card.style.outline='2px solid var(--seal)';
+        setTimeout(()=>card.style.outline='',1400); }
+    };
+    track.appendChild(el);
+  });
+}
+
+/* ── 목록 ── */
+let filt='all', query='';
+function render(){
+  const list = document.getElementById('list');
+  let rows = DATA.filter(d=>{
+    const okF = filt==='all' || (filt==='act'? d.act : d.kind===filt);
+    const okQ = !query || (d.title+d.sum+d.scope).toLowerCase().includes(query.toLowerCase());
+    return okF && okQ;
+  });
+  if(!rows.length){
+    list.innerHTML = `<div class="ghead"><i></i></div>
+      <p style="color:var(--muted);font-size:13.5px">해당하는 항목이 없습니다. 다른 키워드로 검색하거나 필터를 전체로 바꿔보세요.</p>`;
+    return;
+  }
+  const A = rows.filter(r=>r.act), B = rows.filter(r=>!r.act);
+  list.innerHTML =
+    (A.length?`<div class="ghead urgent">조치 필요 · ${A.length}건<i></i></div>`+A.map(card).join(''):'') +
+    (B.length?`<div class="ghead">참고 · ${B.length}건<i></i></div>`+B.map(card).join(''):'');
+  bind();
+}
+function card(d){
+  const dd = dday(d.eff);
+  return `<article class="item ${d.act?'act':''}" id="i${d.id}">
+    <div class="item-top">
+      <span class="kind ${d.act?'k1':''}">${d.kind}</span>
+      ${d.eff?`<span class="eff">시행 <b>${d.eff.replace(/-/g,'.')}</b> · ${ddText(dd)}</span>`:`<span class="eff">상시</span>`}
+    </div>
+    <h3>${d.title}</h3>
+    <p>${d.sum}</p>
+    <div class="scope"><b>적용 대상</b> — ${d.scope}</div>
+    <div class="item-foot">
+      ${d.diff?`<button class="ghost" data-d="${d.id}">신구 대비 ${d.diff.length}개 조문</button>`:''}
+      <select class="status" data-s="${d.id}" aria-label="처리 상태">
+        <option${stat[d.id]==='신규'?' selected':''}>신규</option>
+        <option${stat[d.id]==='검토중'?' selected':''}>검토중</option>
+        <option${stat[d.id]==='완료'?' selected':''}>완료</option>
+      </select>
+      <a class="src" href="${d.link}">${d.src} ↗</a>
+    </div>
+    ${d.diff?`<div class="diff" id="d${d.id}">
+      <div class="diff-h">신구조문 대비 · ${d.diff.length}개 조문</div>
+      ${d.diff.map(p=>`
+        <div class="diff-art">${esc(p.article||'')}</div>
+        <div class="diff-grid">
+          <div class="diff-cell"><h4>개정 전</h4><p>${p.old?esc(p.old):'<em>신설</em>'}</p></div>
+          <div class="diff-cell new"><h4>개정 후</h4><p>${p.new?esc(p.new):'<em>삭제</em>'}</p></div>
+        </div>`).join('')}
+      ${d.diffSrc?`<a class="src" style="margin:10px 0 0;display:inline-block" href="${d.diffSrc}">신구법 비교 원문 ↗</a>`:''}
+      </div>`:''}
+  </article>`;
+}
+function bind(){
+  document.querySelectorAll('[data-d]').forEach(b=>{ b.dataset.label=b.textContent; b.onclick=()=>{
+    const el=document.getElementById('d'+b.dataset.d);
+    el.classList.toggle('open');
+    b.textContent = el.classList.contains('open')?'접기':b.dataset.label;
+  };});
+  document.querySelectorAll('[data-s]').forEach(sel=>sel.onchange=()=>{
+    stat[sel.dataset.s]=sel.value;
+    // 실서비스: 여기서 PATCH /items/{uid} 로 상태를 서버에 저장합니다.
+    // 정적 배포 상태에서는 새로고침하면 초기화됩니다.
+  });
+}
+document.getElementById('chips').onclick=e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  filt=b.dataset.f;
+  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed', c===b));
+  render();
+};
+document.getElementById('q').oninput=e=>{query=e.target.value;render();};
+
+/* ── 물어보기 ── */
+const log=document.getElementById('log');
+function push(who,html,cls){
+  const d=document.createElement('div');
+  d.className='msg '+(cls||'');
+  d.innerHTML=`<div class="who">${who}</div>${html}`;
+  log.appendChild(d); log.scrollTop=log.scrollHeight;
+  return d;
+}
+async function ask(text){
+  if(!text.trim()) return;
+  push('나',`<p>${text}</p>`);
+  const thinking = push('모니터','<p style="color:var(--muted)">찾는 중…</p>','a');
+  const ctx = DATA.map(d=>`[${d.kind}] ${d.title} | 시행일 ${d.eff||'상시'} | 조치필요 ${d.act?'예':'아니오'} | 요약 ${d.sum} | 적용대상 ${d.scope} | 출처 ${d.src}`).join('\n');
+  try{
+    const r = await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1000, messages:[{role:"user",content:
+`너는 한국 기업 인사팀의 노동법 모니터링 도구다. 아래 수집 항목만을 근거로 답한다. 항목에 없는 내용은 추측하지 말고 "수집된 항목에는 없습니다"라고 답한다. 오늘은 2026-08-28이다.
+
+수집 항목:
+${ctx}
+
+질문: ${text}
+
+3~4문장 이내로 한국어로 답하고, 마지막 줄에 반드시 "근거: <항목 제목> (출처)" 형식으로 참조한 항목을 적어라. 마크다운 없이 평문으로.`}]})
+    });
+    const j = await r.json();
+    const t = j.content.map(c=>c.text||"").join("").trim();
+    const lines = t.split('\n').filter(Boolean);
+    const ref = lines.filter(l=>l.startsWith('근거')).join(' ');
+    const body = lines.filter(l=>!l.startsWith('근거')).join(' ');
+    thinking.innerHTML = `<div class="who">모니터</div><p>${body}</p>${ref?`<span class="ref">${ref}</span>`:''}`;
+  }catch(e){
+    thinking.innerHTML = `<div class="who">모니터</div><p>연결하지 못했습니다. 실제 서비스에서는 이 자리에 저장된 항목을 검색한 답변과 원문 링크가 표시됩니다.</p>`;
+  }
+}
+document.getElementById('send').onclick=()=>{const i=document.getElementById('qi');ask(i.value);i.value='';};
+document.getElementById('qi').onkeydown=e=>{if(e.key==='Enter'){const i=e.target;ask(i.value);i.value='';}};
+document.getElementById('seed').onclick=e=>{const b=e.target.closest('button');if(b)ask(b.textContent);};
+
+/* ── 메일 미리보기 ── */
+function buildMail(){
+const A=DATA.filter(d=>d.act), B=DATA.filter(d=>!d.act);
+const mi=d=>`<div class="mail-item ${d.act?'act':''}">
+  <h3>${d.title}</h3>
+  <div class="m">${d.kind}${d.eff?` · 시행 ${d.eff.replace(/-/g,'.')} · ${ddText(dday(d.eff))}`:''}</div>
+  <p>${d.sum}</p>
+  <p style="margin-top:6px;color:var(--muted);font-size:12.5px">적용 대상 — ${d.scope}</p>
+  <a href="${d.link}">${d.src} 원문 보기 ↗</a></div>`;
+document.getElementById('mail').innerHTML=`
+  <div class="mail-top"><h2>노동법 모니터 · 제12호</h2>
+  <div>2026.08.28 (금) · 신규 ${DATA.length}건 · 조치 필요 ${A.length}건</div></div>
+  <div class="mail-sec">조치 필요 ${A.length}건</div>${A.map(mi).join('')}
+  <div class="mail-sec q">참고 ${B.length}건</div>${B.map(mi).join('')}
+  <div class="mail-foot">
+    AI가 원문을 요약했습니다. 판단 전 반드시 원문을 확인하세요.<br>
+    조치 필요 항목은 대시보드에서 담당자를 지정해 주세요.<br>
+    수신 설정 변경 · 대시보드 열기
+  </div>`;
+}
+const veil=document.getElementById('veil');
+document.getElementById('mailBtn').onclick=()=>{veil.classList.add('open');document.getElementById('close').focus();};
+document.getElementById('close').onclick=()=>veil.classList.remove('open');
+veil.onclick=e=>{if(e.target===veil)veil.classList.remove('open');};
+document.onkeydown=e=>{if(e.key==='Escape')veil.classList.remove('open');};
+
+boot();
+</script>

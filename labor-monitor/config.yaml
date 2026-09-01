@@ -1,0 +1,200 @@
+# ─────────────────────────────────────────────────────────────
+# 노동법 모니터 설정
+# 여기 값만 회사에 맞게 고치면 됩니다. 코드는 건드릴 필요 없습니다.
+# ─────────────────────────────────────────────────────────────
+
+company:
+  # 이 블록이 "우리 회사에 해당되는가" 판정의 근거가 됩니다.
+  # 구체적으로 쓸수록 무관한 알림이 줄어듭니다.
+  name: "우리회사"
+  industry: "소프트웨어 개발업"
+  headcount: 180
+  employment_types:
+    - "사무직 정규직 (대부분)"
+    - "계약직 12명"
+    - "육아기 단축근무 3명"
+  shift_work: false          # 교대제 운영 여부
+  uses_dispatch: false       # 파견·도급 사용 여부
+  has_union: false
+  locations: ["서울"]
+  notes: >
+    제조·건설·운수 현장 없음. 전원 사무직 사업장이므로 산업안전보건 관련은
+    사무직에 적용되는 부분만 해당. 야간·휴일근로 상시 발생하지 않음.
+
+keywords:
+  # 1차 필터. 여기 걸린 것만 LLM 판정으로 넘어갑니다 (비용 절감).
+  # 처음엔 넓게 잡고, 2~3주 운영하며 노이즈 소스를 exclude로 옮기세요.
+  include:
+    - 최저임금
+    - 근로기준법
+    - 근로시간
+    - 연차
+    - 유급휴가
+    - 육아휴직
+    - 육아기 근로시간 단축
+    - 출산전후휴가
+    - 통상임금
+    - 평균임금
+    - 퇴직급여
+    - 퇴직연금
+    - 취업규칙
+    - 직장 내 괴롭힘
+    - 직장 내 성희롱
+    - 남녀고용평등
+    - 고용보험
+    - 산재보험
+    - 4대보험
+    - 중대재해
+    - 산업안전보건
+    - 정년
+    - 고령자
+    - 기간제
+    - 단시간
+    - 파견
+    - 근로계약
+    - 임금명세서
+    - 주52시간
+    - 유연근무
+    - 재택근무
+  exclude:
+    # 제목/본문에 이 단어가 있으면 1차에서 버립니다.
+    - 건설업
+    - 조선업
+    - 광업
+    - 어선원
+    - 선원
+    - 농업인
+    - 채용박람회
+    - 공모전
+    - 수상자
+    - 표창
+    - 우수기업 선정
+
+sources:
+  moel_rss:
+    # 고용노동부 공식 RSS. 별도 인증 없이 바로 씁니다.
+    - name: "고용노동부 입법·행정예고"
+      url: "https://www.moel.go.kr/rss/lawinfo.do"
+      kind: "예고"
+      priority: high      # 확정 전 단계 → 가장 빠른 신호
+    - name: "고용노동부 알려드립니다"
+      url: "https://www.moel.go.kr/rss/notice.do"
+      kind: "공지"
+      priority: normal
+    - name: "고용노동부 정책자료"
+      url: "https://www.moel.go.kr/rss/policy.do"
+      kind: "정책"
+      priority: normal
+
+  law_api:
+    # 법제처 국가법령정보 공동활용 OPEN API
+    # 신청: https://open.law.go.kr → OPEN API 신청 (무료)
+    # OC 값은 신청 시 발급받은 이메일 아이디(@ 앞부분). 환경변수 LAW_OC 로 넣으세요.
+    #
+    # ※ 부가서비스(신구법 비교)와 법령해석·위원회 결정문은 target 값이 서비스마다 다릅니다.
+    #    `python run.py probe` 로 실제로 찔러본 뒤 verified: true 로 바꾸세요.
+    #    verified: false 인 소스는 실패해도 경고만 남기고 넘어갑니다.
+    #
+    # ※ 처음에는 false 로 두고 시작하세요.
+    #    고용노동부 RSS만으로도 핵심(입법·행정예고)은 다 들어옵니다.
+    #    LAW_OC 를 발급받은 뒤 true 로 바꾸면 법령 전문과 신구조문 대비가 추가됩니다.
+    enabled: false
+    org: "1492000"        # 고용노동부 소관부처 코드. 결과가 비면 활용가이드에서 확인 후 수정.
+    lookback_days: 14     # 발령일자 기준 최근 N일만 조회 (prmlYd 파라미터)
+
+    drf_sources:
+      # ── 확인 완료 ──────────────────────────────────────────
+      - name: "고용노동부 고시·훈령·예규"
+        target: "admrul"
+        kind: "고시"
+        verified: true
+        params:
+          sort: "efdes"          # 시행일자 내림차순
+          nw: 1                  # 현행만
+        use_org: true
+        use_lookback: true       # prmlYd 로 최근 발령분만
+
+      - name: "현행법령(시행일 기준)"
+        target: "eflaw"
+        kind: "법령"
+        verified: true
+        queries:                 # 법령명으로 조회
+          - "근로기준법"
+          - "근로자퇴직급여 보장법"
+          - "남녀고용평등과 일ㆍ가정 양립 지원에 관한 법률"
+          - "고용보험법"
+          - "산업안전보건법"
+          - "기간제 및 단시간근로자 보호 등에 관한 법률"
+          - "최저임금법"
+          - "고용상 연령차별금지 및 고령자고용촉진에 관한 법률"
+
+      # ── probe 로 확인 필요 ─────────────────────────────────
+      # 아래는 활용가이드 목록에 존재가 확인된 서비스들입니다.
+      # target 후보를 probe 가 순서대로 시도하고, 되는 값을 알려줍니다.
+      - name: "고용노동부 법령해석"
+        target: "expc"
+        target_candidates: ["expc", "moelExpc", "moelLsIntp", "lsIntp"]
+        kind: "해석"
+        verified: false
+        use_org: true
+
+      - name: "노동위원회 결정문"
+        target: "nlrc"
+        target_candidates: ["nlrc", "nlrcDecc", "decc"]
+        kind: "결정"
+        verified: false
+
+      - name: "고용보험심사위원회 결정문"
+        target: "eiac"
+        target_candidates: ["eiac", "ei", "eiacDecc"]
+        kind: "결정"
+        verified: false
+
+      - name: "산업재해보상보험재심사위원회 결정문"
+        target: "iaciac"
+        target_candidates: ["iaciac", "iac", "sanjaeDecc"]
+        kind: "결정"
+        verified: false
+
+    # ── 신구조문 대비 ─────────────────────────────────────────
+    # 개정 건을 발견하면 개정 전/후 조문을 가져와 대시보드·메일에 표시하고,
+    # LLM 판정 프롬프트에도 넣습니다. 요약 정확도가 같이 올라갑니다.
+    diff:
+      enabled: true
+      verified: false            # probe 로 확인 후 true 로
+      # 목록 조회로 비교 ID를 얻고, 본문 조회로 조문 쌍을 가져옵니다.
+      admrul:
+        list_target: "admrulOldAndNew"
+        list_candidates: ["admrulOldAndNew", "admrulSgb", "oldAndNewAdmrul"]
+        body_target: "admrulOldAndNew"
+      law:
+        list_target: "oldAndNew"
+        list_candidates: ["oldAndNew", "lsRvs", "lsOldAndNew", "sgb"]
+        body_target: "oldAndNew"
+      max_per_run: 10            # 한 실행에서 대비표를 가져올 최대 건수
+      max_pairs: 12              # 항목당 저장할 조문 쌍 개수 상한
+
+  news:
+    # 구글 뉴스 RSS. 별도 키 불필요.
+    enabled: true
+    queries:
+      - "노동법 개정"
+      - "고용노동부 고시"
+      - "최저임금"
+      - "근로기준법 판결"
+      - "통상임금"
+    max_per_query: 10
+    # 뉴스는 노이즈가 많아 조치등급을 강제로 낮춥니다.
+    force_action_level: "none"
+
+digest:
+  to:
+    - "hr-team@company.co.kr"
+  from: "노동법 모니터 <monitor@company.co.kr>"
+  subject_prefix: "[노동법 모니터]"
+  send_when_empty: false   # 신규 건이 없으면 메일을 보내지 않음
+  # SMTP 정보는 환경변수로: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+
+llm:
+  model: "claude-sonnet-4-6"
+  max_items_per_call: 6    # 한 번에 몇 건씩 묶어 판정할지
