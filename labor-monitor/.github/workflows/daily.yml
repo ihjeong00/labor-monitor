@@ -1,0 +1,42 @@
+name: 노동법 모니터 일간 수집
+
+on:
+  schedule:
+    - cron: "0 22 * * 0-4"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 패키지 설치
+        run: pip install -r labor-monitor/requirements.txt
+
+      - name: 수집 및 저장
+        env:
+          TZ: Asia/Seoul
+        run: cd labor-monitor && python run.py collect --no-llm
+
+      - name: 대시보드 갱신
+        env:
+          TZ: Asia/Seoul
+        run: cd labor-monitor && python run.py export
+
+      - name: 변경사항 저장
+        run: |
+          git config user.name "labor-monitor"
+          git config user.email "actions@users.noreply.github.com"
+          git add labor-monitor/data/monitor.db labor-monitor/dashboard/data.json
+          git diff --staged --quiet || git commit -m "모니터 수집 $(date +%Y-%m-%d)"
+          git push
