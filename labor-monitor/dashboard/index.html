@@ -483,7 +483,7 @@ function card(d){
           <div class="diff-cell"><h4>개정 전</h4><p>${p.old?esc(p.old):'<em>신설</em>'}</p></div>
           <div class="diff-cell new"><h4>개정 후</h4><p>${p.new?esc(p.new):'<em>삭제</em>'}</p></div>
         </div>`).join('')}
-      ${d.diffSrc?`<a class="src" style="margin:10px 0 0;display:inline-block" href="${d.diffSrc}">신구법 비교 원문 ↗</a>`:''}
+      ${d.diffSrc?`<a class="src" style="margin:10px 0 0;display:inline-block" href="${d.diffSrc}" target="_blank" rel="noopener">신구법 비교 원문 ↗</a>`:''}
       </div>`:''}
   </article>`;
 }
@@ -556,7 +556,7 @@ const mi=d=>`<div class="mail-item ${d.act?'act':''}">
   <div class="m">${d.kind}${d.eff?` · 시행 ${d.eff.replace(/-/g,'.')} · ${ddText(dday(d.eff))}`:''}</div>
   <p>${d.sum}</p>
   <p style="margin-top:6px;color:var(--muted);font-size:12.5px">적용 대상 — ${d.scope}</p>
-  <a href="${d.link}">${d.src} 원문 보기 ↗</a></div>`;
+  <a href="${d.link}" target="_blank" rel="noopener">${d.src} 원문 보기 ↗</a></div>`;
 document.getElementById('mail').innerHTML=`
   <div class="mail-top"><h2>노동법 모니터 · 제12호</h2>
   <div>2026.08.28 (금) · 신규 ${DATA.length}건 · 조치 필요 ${A.length}건</div></div>
