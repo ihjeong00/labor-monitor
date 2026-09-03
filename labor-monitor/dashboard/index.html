@@ -473,7 +473,7 @@ function card(d){
         <option${stat[d.id]==='검토중'?' selected':''}>검토중</option>
         <option${stat[d.id]==='완료'?' selected':''}>완료</option>
       </select>
-      <a class="src" href="${d.link}">${d.src} ↗</a>
+      <a class="src" href="${d.link}" target="_blank" rel="noopener">${d.src} ↗</a>
     </div>
     ${d.diff?`<div class="diff" id="d${d.id}">
       <div class="diff-h">신구조문 대비 · ${d.diff.length}개 조문</div>
