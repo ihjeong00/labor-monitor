@@ -390,7 +390,8 @@ async function boot(){
       title:it.title, eff:it.effective_date || '', sum:it.summary || '',
       scope:it.scope || '', src:it.source || '원문', link:it.link || '#',
       status:it.status || '신규', uid:it.uid,
-      diff:(it.diff && it.diff.length) ? it.diff : null, diffSrc:it.diff_source || ''
+      diff:(it.diff && it.diff.length) ? it.diff : null, diffSrc:it.diff_source || '',
+      pub:it.published || ''
     }));
     LIVE = true;
     document.querySelector('.notice').remove();
@@ -459,8 +460,10 @@ function card(d){
     <div class="item-top">
       <span class="kind ${d.act?'k1':''}">${d.kind}</span>
       ${d.eff?`<span class="eff">시행 <b>${d.eff.replace(/-/g,'.')}</b> · ${ddText(dd)}</span>`:`<span class="eff">상시</span>`}
+      <span class="eff" style="color:var(--muted)">${d.pub ? d.pub.replace(/-/g,'.') : d.first_seen ? '수집 '+d.first_seen.replace(/-/g,'.') : ''}</span>
     </div>
     <h3>${d.title}</h3>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:8px">${esc(d.src.replace('뉴스 · ',''))}</div>
     <p>${d.sum}</p>
     <div class="scope"><b>적용 대상</b> — ${d.scope}</div>
     <div class="item-foot">
