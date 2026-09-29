@@ -1,12 +1,63 @@
 {
-  "generated_at": "2026-09-29",
-  "issue": 23,
+  "generated_at": "2026-09-30",
+  "issue": 24,
   "stats": {
-    "total": 443,
-    "relevant": 227,
-    "open_actions": 227
+    "total": 454,
+    "relevant": 230,
+    "open_actions": 230
   },
   "items": [
+    {
+      "uid": "9d6a677ddf200908",
+      "kind": "뉴스",
+      "title": "최저임금 이의제기 기각…소공연, 최저임금 고시 취소 행정소송키로 - marketin.edaily.co.kr",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 고용노동부 고시",
+      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1FZ0xvVUxVYm5HQWhRWndNSndubTJiVHYyWnhPTjFmUG9IR3BkQ1c3QnZPVDZuNUVVdXBUcU5zWG9mZmEyeXRLU096VUx5cnBLOUtMNUo5QXdpbm5ySFp0aThNNVA3aTU2TWY5UnZFaGU5NFk?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "6012520f3d51324b",
+      "kind": "뉴스",
+      "title": "서울교육청, 내년 생활임금 1만2760원…최저임금보다 2060원↑ - 뉴스1",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WM3hiOWN5ODk4MDhFMzk4enRzNF9vV0hreG16bW53QzA3X2xGLUNSOFFsZXprdU15QXo5TEx3VXp6MXhZTE5YNTE0SVRGT21aZWpkNDhzbWlMZ9IBX0FVX3lxTFBMSmUwem9ja1ZMTW0xNUdLTjVDRC1FQ3BlbWRaWHRWNUctNjR6TmtkWW5rN2JqS3FKYkUyVFIxRnFLbmJiUHRSbFZkcHZxT3dEQlJLcUo1SDBvbmVxRHBj?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "7505d4b3e5132962",
+      "kind": "뉴스",
+      "title": "퇴직금, 통상임금으로 다시 계산해야 할까? - 월간노동법률",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 통상임금",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNZFp4UjhIUm9lX2RrVVNJZDZZZzF0c2k0YmwxWENxbTRNS21hMDdZSUV3ZXBtaDBaUXpPdXM5cmtHZEtrWGlfaG1CYXBJbTFaWUx4dzhlakNNempBZnJMYXBGSlV6aDlsLXAzR1JnSWdlRDJxQWlRcHFFQVpMYmc2V2lSVEVWNmlCdnVxLUZR?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
     {
       "uid": "b8eddeab4ba021fe",
       "kind": "뉴스",
