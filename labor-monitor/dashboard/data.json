@@ -1,12 +1,63 @@
 {
-  "generated_at": "2026-11-10",
+  "generated_at": "2026-11-11",
   "issue": 44,
   "stats": {
-    "total": 864,
-    "relevant": 432,
-    "open_actions": 432
+    "total": 876,
+    "relevant": 435,
+    "open_actions": 435
   },
   "items": [
+    {
+      "uid": "4082c666df97c548",
+      "kind": "뉴스",
+      "title": "프랑스 정부, ‘시위 대응’으로 최저임금 특별인상 결정···노조 “불충분” - 경향신문",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPSGt4Q191SmJYU216UWpaUThOYzNtbU1GYkRyOFRBZ29mWTRUZUUzc01NVGNfSlNwYUxUaHRWcWlGYkhQN0xGUy03NHBtUjR1MWpCOVVuYjVHWGo2cks0SXd6MEQ4cW5BckZQOWhsWXpBVzNLaEFXMFdxVXB0WkdpLTkxM2U1VEtvbm1RUkdTWXpWWllWRlZWVFhlXzl4bzNiaEk4MmJxSdIBX0FVX3lxTFA5TlEwYXp6elNKdFV5VW9FZXRkT01zcUlDVFRBWUpwa2xyTVdaM1JKSllwbVc0Ni1abG5GbkxCbDdxT0lyczNESFNwaDM0RlBURHUtdGkzUTBpems4VkxF?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "6b153291114523e0",
+      "kind": "뉴스",
+      "title": "프랑스, '고물가 시위'에 최저임금 1.6%↑…노조 '부족' - OBS경인TV",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5PTEJqLUp5QlY5aS1WNFZlUm40YWM3VEczU1lZYm04OUFKWHVtcVl1NTN1QzdtYWdoUFFVY09oSXBUVjE1QklGTnZqOWtvbGVqMmxYSlVLQld5RVBjR2hmOVFqamNPOEM4aUFDSGZ3?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "c18a08d7942c5ae6",
+      "kind": "뉴스",
+      "title": "통상임금이 뭐길래…한 치도 물러서지 않는 서울버스 노사 - 한국경제",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 통상임금",
+      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBpRjVlYmpvYzhjdDQ1T2NieFpXMlNXQW0ydmxETklXeElrYThCWkE2U0xLalB1aVVBUHl4ZjRjQWJjaWRldkNyUTdYaFBTX0VERUdCc3pVTERHdw?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
     {
       "uid": "4f15a89ce9ce2bf8",
       "kind": "뉴스",
