@@ -1,12 +1,63 @@
 {
-  "generated_at": "2026-11-19",
+  "generated_at": "2026-11-20",
   "issue": 49,
   "stats": {
-    "total": 978,
-    "relevant": 480,
-    "open_actions": 480
+    "total": 991,
+    "relevant": 483,
+    "open_actions": 483
   },
   "items": [
+    {
+      "uid": "62e89ee304e14865",
+      "kind": "뉴스",
+      "title": "간호조무사 10년 이상 근속자 39% ‘최저임금 수준’ - 덴탈투데이",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1mWDd1MEtXSGhyc0t2U2dOMDhjeWlzZmloR25MR1hBTWNuV0xmendRM0w3SzEwSzZuS3ZLV1lkR01RTmZDeml2amZ0Vzd5QUtDRkRLQWx4QlFsTDV3TXZOM29ESk9Val9U?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "9bcc9e72711a1b35",
+      "kind": "뉴스",
+      "title": "“최저임금 올려달라”…방글라데시 시위 격화 - 채널A",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9wX3BwQ3hrYUgtZFJ6dUpNNF9MVEZYSXF0SzFleWxDY1RKdmxISGhLV0VPLWlXUkRPejdIUGNmMlZKNHhvZ3pyM3E5R1UwRHA3a04ydEtzMkZOOFotY3fSAWNBVV95cUxNMVdOLXFvaGlCOUl1WXNEMVdabWdURHpiU1laQ2dTLUZvaG0wSU8xRVVlTm1rNHQ4VHA4QnVYbkNyckhJLWpQUnY2aVlYSlZTdzRpeWxJR29fdmw1M01FSHBMRlk?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "3094d46b67905776",
+      "kind": "뉴스",
+      "title": "[밴쿠버 조선일보]최저임금으론 빠듯··· 생활임금 또 올랐다 | 밴쿠버 뉴스 - 밴쿠버 조선일보",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5WOXE4VDZDek1OM1pWUGxNTDI4Qk5tVzRBSFhuWGpKYnM0UkZHT0JrRzNoN0pYcjRKMUFHa3pmSTFUM0w3Q1g0cVgwakphN3JPdmtRVEYwUUtYTXlOXzBhRXZKM04tY0psN182b2RuSWNlVkhXV0ZuWDI4VHhFOFE?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
     {
       "uid": "bed89c120dcab16d",
       "kind": "뉴스",
