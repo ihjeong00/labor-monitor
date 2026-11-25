@@ -1,12 +1,63 @@
 {
-  "generated_at": "2026-11-24",
+  "generated_at": "2026-11-25",
   "issue": 50,
   "stats": {
-    "total": 1019,
-    "relevant": 495,
-    "open_actions": 495
+    "total": 1028,
+    "relevant": 498,
+    "open_actions": 498
   },
   "items": [
+    {
+      "uid": "c960ef7af1157a89",
+      "kind": "뉴스",
+      "title": "2027년도 전국 38개주 주단위 최저임금(UMP)(2026.11.23) - 한인포스트",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5CZWRucFRJdXRteFNMcExaeUZnUmZYZHZGMFRwc3ZFWmpLcHpMMW4zTExHd2c5TlVocXJvWFc3bWFGVFk2N21XMm4zUkdsdw?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "dc29ec0ee37dca34",
+      "kind": "뉴스",
+      "title": "② '최저임금' 대구 지자체···'생활임금' 광주와 월 63만 원 차이 - 대구MBC",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 최저임금",
+      "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5JQk5jWGJGUWczblBTV1VnM05GNkhLZVB6OXdXRXZSNUJZcVdldnAtelBWOU9SVmlIRHFjVHhES0JuSWVlaVhlcTBHakw?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
+    {
+      "uid": "ce5e302c6c33f8a7",
+      "kind": "뉴스",
+      "title": "법원 “업주와 직원, 퇴사 사전통보 위약금 약정은 근로기준법 위반 무효” - 로리더",
+      "summary": "",
+      "scope": "",
+      "effective_date": "",
+      "published": "",
+      "action_level": "review",
+      "status": "신규",
+      "assignee": "",
+      "source": "뉴스 · 근로기준법 판결",
+      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBWbEd6MUZJaVRVX1g3UF9HSUVHMVI5MFg0RzczT05vY0RTazUySDJ2OHNWbVliei1IcDE3TUx2Ulg2T254dEMtNEhJemtRSXRLblZDTTNNYUFFVndETFIxbllPOGV6eWR4eGE0MtIBcEFVX3lxTE1mU2d2b284eFM4Z2ctV1kxdlhHcEVnMEZVcnBYbUYxbDllWmRjZjdxQS1HM041cTBrUldSdVJfMlZNS3dhMVFZVUFBdTNtWUVNQlpadXZOVDI1Xzd0V21kdmJTNlVIR2NXbGVMbkszVDc?oc=5",
+      "reason": "키워드 필터만 통과 (자동 요약 미사용)",
+      "diff": [],
+      "diff_source": ""
+    },
     {
       "uid": "29e0bf810c650170",
       "kind": "뉴스",
